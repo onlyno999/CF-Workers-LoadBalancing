@@ -18,9 +18,9 @@ export default {
 		let 测试路径 = env.PATH || '/';
 		// 确保测试路径以 '/' 开头
 		if (测试路径.charAt(0) !== '/') 测试路径 = '/' + 测试路径;
-		let 响应代码 = env.CODE || 200;
+		let 响应代码 = env.CODE || '200';
 		// 打印后端域名的数量和列表
-		console.log(后端域名.length , 后端域名);
+		console.log(`后端数量: ${后端域名.length}\n后端域名: ${后端域名}\n测试路径: ${测试路径}\n响应代码: ${响应代码}`);
 
 		// 存储失效的后端域名
 		let 失效后端 = [];
@@ -56,7 +56,7 @@ export default {
 					// 发起请求，并设置超时时间
 					const response = await fetchWithTimeout(new Request(url), { timeout: 1618 });
 					// 如果响应状态为 200，表示请求成功
-					if (response.status == 响应代码) {
+					if (response.status.toString() == 响应代码) {
 						if (访问路径 != '/') url.pathname = 访问路径;
 						console.log(`使用后端: ${url.hostname}`);
 						//console.log(`失效后端: ${失效后端}`);
