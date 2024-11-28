@@ -4,6 +4,7 @@ export default {
 		// 解析请求的 URL
 		let url = new URL(request.url);
 		const 访问路径 = url.pathname;
+		const 访问参数 = url.search;
 		// 默认后端域名列表
 		let 后端域名 = [
 			'www.baidu.com',
@@ -50,8 +51,8 @@ export default {
 				后端域名 = 后端域名.filter(host => host !== 随机后端);
 
 				url.hostname = 随机后端; // 域名
-				url.pathname = 测试路径;
-
+				url.pathname = 测试路径.split('?')[0];
+				url.search = 测试路径.split('?')[1] == "" ? "" : "?" + 测试路径.split('?')[1] ;
 				try {
 					// 发起请求，并设置超时时间
 					const response = await fetchWithTimeout(new Request(url), { timeout: 1618 });
@@ -61,6 +62,7 @@ export default {
 						console.log(`使用后端: ${url.hostname}`);
 						//console.log(`失效后端: ${失效后端}`);
 						console.log(`待选后端: ${后端域名}`);
+						url.search = 访问参数;
 						return await fetch(new Request(url, request));
 					} else {
 						console.log(`失效后端: ${url.hostname}:${response.status}`);
