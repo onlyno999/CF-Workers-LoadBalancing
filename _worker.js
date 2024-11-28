@@ -56,7 +56,7 @@ export default {
 					// 发起请求，并设置超时时间
 					const response = await fetchWithTimeout(new Request(url), { timeout: 1618 });
 					// 如果响应状态为 200，表示请求成功
-					if (response.status === 响应代码) {
+					if (response.status == 响应代码) {
 						if (访问路径 != '/') url.pathname = 访问路径;
 						console.log(`使用后端: ${url.hostname}`);
 						//console.log(`失效后端: ${失效后端}`);
